@@ -20,8 +20,15 @@ var dh2221778997 = {
     return newary
   },
 
-  compact: function() {
-
+  compact: function(array) {
+    var newary = []
+    for (var i = 0 ; i < array.length ; i++) {
+      var t = array[i]
+      if (!(t == false || t == null || t == 0 || t == undefined || t == NaN || t == '')) {
+        newary.push(t)
+      }
+    }
+    return newary
   },
 
 
