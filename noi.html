@@ -1827,6 +1827,764 @@ console.log(addDigits(38))
   }
   }
 </script>
+<script type="" id="ch0105/01">
+  function insertsort(ary) {
+    for (var i = 1; i < ary.length ; i++) {
+      for (var j = i-1 ; j >= 0 ; j--) {
+        var c = ary[i]
+        if (ary[i] < ary[j]) {
+          ary[j+1] = ary[j]
+        } else {
+          ary[j+1] = c
+          break
+        }
+      }
+    }
+  }
+</script>
+<script type="" id="ch0105/01">
+  function mergesort(params) {
+    var midindex = Math.floor((ary.length-1)/2)
+    leftary = ary.slice(0,midindex)
+    rightary = ary.slice(midindex)
+    var nums = []
+    for (var i=0,j= 0; i < leftary.length , j < rightary.length; ) {
+      if (leftary(i) < rightary(j)) {
+        nums.push(leftary[i])
+        i++
+      } else {
+        nums.push(rightary[j])
+        j++
+      }
+    }
+    if (i == leftary.length) {
+      for (;j<rightary.length ; j++)
+      nums.push(rightary[j])
+    }
+    if (j == rightary.length) {
+      for (;i<leftary.length;i++) {
+        nums.push(leftary[i])
+      }
+    }
+</script>
+<script type="" id="ch0105/01">
+  for (var i = -1,j = 0;;) {
+    if (ary[j] < pivot) {
+      i++
+      j++
+      swap(ary,i,j)
+    } else {
+      j++
+    }
+   }
+</script>
+<script type="" id="ch0105/01">
+  function deepEqual(a,b) {
+    if (a === b) {
+      return true
+    }
+    if (a != a && b != b) {
+      return true
+    }
+    if (Array.isArray(a) && Array.isArray(b)) {
+      if (a.length != b.length) {
+        return false
+      }
+      for (var i = 0 ; i< a.length ;i++) {
+        if (!deepEqual(a[i],b[i])) {
+          return false
+        }
+      }
+      return true
+    }
+    if (a && b && typeof a == typeof b && !Array.isArray(a) && !Array.isArray(b)) {
+      for (var key in a) {
+        if (!(key in b)) {
+          return false
+        }
+        if (a[key] != b[key]) {
+          return false
+        }
+      }
+      for (var key in b) {
+        if (!(key in a)) {
+          return false
+        }
+        if (b[key] != <a href=""></a>[key]) {
+          return false
+        }
+      }
+      return true
+    }
+    return a === b
+  }
+</script>
+<script type="" id="ch0105/01">
+  var targetx = 3
+  var targety = 4
+  function find(x,y,history) {
+    if (x == targetx && y == targety) {
+      console.log(history)
+      return
+    } else if (x > targetx || y > targety) {
+      return
+    } else {
+      find(x+1,y,history+"+i") || find(x,y+1,history+"+j")
+    }
+  }
+</script>
+<script type="" id="ch0105/01">
+  function arraytolist(ary) {
+    var dummynode = {val:0, next:null}
+    var  prenode = dummynode
+    for (var i = 0; i< ary.length ; i++) {
+      var node = {
+        val: ary[i],
+        next: null,
+      }
+      prenode.next = node
+      prenode = node
+    }
+    return dummynode.next
+  }
+</script>
+<script type="" id="ch0105/01">
+  function listtoarray(list) {
+    ary[0] = list.val
+    ary[1] = list[next][val]
+    ary[2] = list[next][next][val]
+    ary[3] = list[next][next][next][val]
+  }
+    var p = list
+function listtoarray(list) {
+  var p = list
+  var i = 0
+  while (p.next != null) {
+    ary[i] = p[val]
+    p = p.next
+    i++
+  }
+  for (var i = 0 ; i < ;i++) {
+    ary[i] = p[val]
+    p = p.next
+  }
+  return ary
+  }
+
+</script>
+<script type="" id="ch0105/01">
+  function arraytolistr(ary) {
+    if ()
+    var node = {val:ary[0],next:null}
+    var newary = ary.slice(1)
+    arraytolistr(newary)
+
+  }
+</script>
+<script type="" id="ch0105/01">
+  function prepend(list,val) {
+    var node = {val:0,next:null}
+    node.val = val
+    node.next = list
+    return node
+  }
+  var list = null
+  for (var i = ary.length-1;i>=0; i) {
+    list = prepend(list,ary[i])
+  }
+  return list
+</script>
+<script type="" id="ch0105/01">
+  function nth(list,n) {
+    if (n >) {
+      return undefined
+    }
+    var c = 0
+    while (list) {
+      var j = list.val
+      list = list.next
+      if (c == n) {
+        break
+      }
+      c++
+    }
+    return j
+</script>
+<script type="" id="ch0105/01">
+  function append(lsit,val) {
+    while (list) {
+      list = list.next
+      if (list == null) {
+        list.val = val
+        list.next = null
+        break
+      }
+    }
+    return list
+  }
+</script>
+<script type="" id="ch0105/01">
+  function nth(lsit,n) {
+    if (list = null) {
+      return null
+    }
+    var p = list
+    if (n == 0) {
+      return p
+    }
+    for (var i = 1 ; i <= n ; i++) {
+      p = p.next
+
+    }
+
+  }
+</script>
+<script type="" id="ch0105/01">
+  function stringfy(obj) {
+    var result = []
+    for (var key in obj) {
+      key+':' +obj[key]+
+    }
+    return result
+  }
+  }
+</script>
+<script type="" id="ch0105/01">
+  var result = {}
+  for (var i = 0 ; i < array.length ; i++) {
+    result[array[i]] = i
+  }
+</script>
+<script type="" id="ch0105/01">
+  function find(ary, predicate) {
+    for (var i = 0; i < ary.length ; i++) {
+      if (predicate(ary[i])) {
+        return ary[i]
+      }
+    }
+
+  }
+</script>
+<script type="" id="ch0105/01">
+  for (var i = 0; i < ary.length; i++) {
+    if (Array.isArray(ary[i])) {
+
+    } else {
+
+    }
+  }
+  ary.reduce((result, it) => {
+    if ()
+    result.concat(it)
+  } [])
+</script>
+<script type="" id="ch0105/01">
+  ancestry.map(p =>{
+    var mothername = p.mother
+    var motherObject = ancestry.find(it => it.mother == mothername)
+  })
+</script>
+<script type="" id="ch0105/01">
+  function flattenDeep(array) {
+    var newary = []
+    for (var i = 0 ; i < array.length; i++) {
+      if (Array.isArray(array[i])) {
+        var flattedary = flattenDeep(array[i])
+        for (var j = 0; j < flattedary.length ; j++) {
+          newary.push(flattedary[j])
+        }
+      } else {
+        newary.push(array[i])
+      }
+    }
+    return newary
+  }
+</script>
+<script type="" id="ch0105/01">
+  function arraytoobject(array) {
+    var map = {}
+    for (var i = 0; i < array.length; i++) {
+      map[array[i]] = i
+    }
+    return map
+  }// 计算表单中男性和女性的平均年龄
+  averAge
+  //表单中的男性 ancestry.filter(item => item.sex == 'm')
+  //表单中的女性 ancestry.filter(item => item.sex == 'f')
+//的年龄  .map(it => it.age)
+  function averAge(array) {
+    var total = 0
+    for (var i = 0; i < array.length; i++) {
+      total += array.age
+    }
+    return total/i+1
+  }
+  ancestry.reduce((ancient, it) => {
+
+  },)
+</script>
+<script type="" id="ch0105/01">
+  function insertIntoBST(bst, val) {
+    if (!bst) {
+      node = New nodeTree(val)
+      return node
+    }
+    if (val < bst.val) {//与左边的比较
+
+    }
+    if (val >= bst.val) {
+
+    }
+  }
+</script>
+<script type="" id="ch0105/01">
+  function bstSort(ary) {
+    var node = {
+      val: 0,
+      left: null,
+      right: null
+    }
+    ary.reduce((node, it) => {
+      return insertIntoBST(node, it)
+    })
+    return inorderTraversal(node)
+  }
+</script>
+<script type="" id="ch0105/01">
+  //二叉树的中序遍历
+
+  function preOrderTraverse(root, action) {
+    if (root) {
+
+    preOrderTraverse(root.left, action)
+    action(root.val)
+    preOrderTraverse(root.right, action)
+    }
+  }
+  function preOrderTraversal(root) {
+    array.push(root.val)
+    preOrderT
+  }
+
+</script>
+<script type="" id="ch0105/01">
+  function insertIntoBST(bst, val) {
+
+    if (!bst) {
+      var node = {
+      val: val,
+      left: null,
+      right: null,
+    }
+    return node
+    }
+    if (val < bst.val) {
+      bst.left = insertIntoBST(bst.left, val)
+    } else {
+      bst.right = insertIntoBST(bst.right, val)
+    }
+    return bst
+
+  }
+</script>
+<script type="" id="ch0105/01">
+  a.push2 = function (val) {
+    this[this.length] = val
+    return a
+  }
+</script>
+<script type="" id="ch0105/01">
+  result = []
+  for (var key in obj) {
+    result.push(key)
+  }
+  return result
+</script>
+<script type="" id="ch0105/01">
+  class Map2 {
+    constructor(prop, property) {
+      this.prop = property
+      size
+    }
+    get(prop) {
+      return property
+    }
+    set(key, value) {
+      return Map
+    }
+    has() {
+      for (var key in prop) {
+        if (key == prop)  {
+          return true
+        }
+      }
+      return false
+    }
+    delete() {
+
+    }
+  }
+</script>
+<script>
+  class Map2 {
+    constructor() {
+      this.keys = [] // 用来存储每组映射的key
+      this.vals = [] // 用来存储每组映射的val
+    }
+    get(key) {
+      var keyIdx = this.keys.indexOf(key)
+      if (keyIdx >= 0) {
+        return this.vals[keyIdx]
+      }
+    }
+    set(key, val) {
+      var keyIdx = this.keys.indexOf(key)
+      if (keyIdx >= 0) {
+
+      } else {
+        this.keys.push(key)
+      this.keys.push(val)
+      this.keys[keys.length-1] = this.vals[vals.length - 1]
+      }
+    }
+    has(key) {
+      var keyIdx = this.keys,indexOf(key)
+      if (keyIdx >= 0) {
+        return true
+      } else {
+        return false
+      }
+    }
+    delete(key) {
+      var keyIdx = this.keys.indexOf(key)
+      if (keyIdx >= 0) {
+        keys.splice()
+        vals.splice()
+        return true
+      } else {
+        return false
+      }
+    }
+    clear() {
+
+    }
+    size() {
+      return this.keys.length
+    }
+  }
+</script>
+class Stack {
+    constructor() {
+      this.top = null // 用于存储栈内元素的链表
+      this.size = 0
+    }
+
+    // 进栈
+    push(val) {
+      var node = {
+        val: val,
+        next: this.top,
+      }
+      this.top = node
+      this.size++
+      return this
+    }
+    // 出栈
+    pop() {
+      if (this.top) {
+        var t = this.top.val
+      this.top = this.top.next
+      this.size--
+      return t
+      }
+    }
+    // 查看栈顶元素的值，但不让它出栈
+    peek() {
+      if (this.top) {
+        return this.top.val
+      }
+    }
+    size() {
+      return this.size
+    }
+  }
+<script type="" id="ch0105/01">
+  <script>
+    class Queue {
+      constructor() {
+        this.top = null
+        this.tail = null
+        this._size = 0
+      }
+
+      enqueue(val) {
+        if (this.top) {
+          var node = {
+          val: val,
+          next: null,
+        }
+        this.top.next = node
+        this.top = node
+        this._size++
+        return this
+        } else {
+          var node = {
+          val: val,
+          next: null,
+        }
+        this.top = node
+        this.tail = node
+        this._size++
+        return this
+        }
+
+      }
+
+      dequeue() {
+        var result = this.top
+        if (this.tail.next) {
+          this.tail = this.tail.next
+          this._size--
+        }
+        if (this._size == 1) {
+          this.top = null,
+          this.tail = null,
+          this._size = 0
+        }
+        return this
+        }
+
+
+      peek() {
+        return this.top.val
+      }
+
+      size() {
+        return this._size
+      }
+
+
+
+
+
+
+    }
+
+<script>
+  class Group {
+    constructor() {
+      var keys = []
+    }
+
+    add(val) {
+      for (var i = 0; i < keys.length; i++) {
+        if (val === a[i]) {
+          return this.keys
+        }
+      }
+      a.push(val)
+      return this.keys
+    }
+
+    has(val) {
+      for (var i = 0; i < keys.length; i++) {
+        if (val === a[i]) {
+          return true
+        }
+      }
+      return false
+    }
+
+    delete(val) {
+      var index = this.indexof(val)
+      if (index > -1) {
+        this.splice(index,1)
+        return true
+      }
+      return false
+    }
+
+    size {
+      return keys.length
+    }
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  </script>
+</script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01"></script>
 <script type="" id="ch0105/01"></script>
 <script type="" id="ch0105/01"></script>
 <script type="" id="ch0105/01"></script>

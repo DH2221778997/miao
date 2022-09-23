@@ -234,7 +234,7 @@ var dh2221778997 = {
     }
   },
 
-  intersection; function(...arrays) {
+  intersection: function(...arrays) {
     var result = []
     var obj = {}
     for (var i = 0; i < arrays.length; i++) {
@@ -257,7 +257,48 @@ var dh2221778997 = {
 
 
 
+  join: function(array, separator = ',') {
+    var strings = ''
+    for (var i = 0; i < array.length; i++) {
+      if (i == array.length -1) {
+        strings += array[i]
+      } else {
+        strings += array[i]+separator
+      }
+    }
+    return strings
+  },
 
+  last: function(array) {
+    var i = array.length - 1
+    return array[i]
+  },
+
+  lastIndexOf: function(array, value, fromIndex = array.length -1) {
+    for (var i = fromIndex; i >= 0; i--) {
+      if (array[i] == value) {
+        return i
+      }
+    }
+  },
+
+  pull: function(array, ...values) {
+    for () {
+
+    }
+  },
+
+  reverse: function(array) {
+    var newary = []
+    for (var i = array.length -1; i >= 0; i--) {
+      newary.push(array[i])
+    }
+     return array = [...newary]
+  },
+
+  sortedIndex: function(array, value) {
+
+  }
 
 
 
