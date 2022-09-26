@@ -282,11 +282,6 @@ var dh2221778997 = {
     }
   },
 
-  pull: function(array, ...values) {
-    for () {
-
-    }
-  },
 
   reverse: function(array) {
     var newary = []
@@ -297,6 +292,22 @@ var dh2221778997 = {
   },
 
   sortedIndex: function(array, value) {
+    //使用二分法
+    var mid = Math.floor(array.length / 2)
+    if (array[mid] == value) {
+      return mid
+    }
+    if (array[mid] > value) {
+      low = mid
+      high = array.length
+
+    }
+    if (array[mid] < value) {
+
+    }
+  },
+
+  every:  function() {
 
   }
 

@@ -2373,7 +2373,7 @@ class Stack {
 <script>
   class Group {
     constructor() {
-      var keys = []
+      var this.keys = []
     }
 
     add(val) {
@@ -2410,10 +2410,69 @@ class Stack {
   }
 </script>
 
+<script>
+  class Vector {
+    constructor(x, y) {
+      this.x = x
+      this.y = y
+    }
+
+    plus(v) {
+      var x = this.x + v.x
+      var y = this.y + v.y
+      var c = new Vector(x, y)
+      return c
+    }
+
+    minus(v) {
+      this.x = this.x - v.x
+      this.y = this.y - v.y
+      return this
+    }
+
+    length() {
+      var c = Math.sqrt(this.x * this.x + this.y * this.y)
+      return c
+    }
 
 
 
 
+
+
+  }
+</script>
+
+<script>
+  class Complex {
+    constructor(real, imag) {
+      var vo = {
+        this.real = 0,
+        this.imag = 0,
+      }
+    }
+
+  plus(c) {
+
+  }
+
+  minus(c) {
+
+  }
+
+  mul(c) {
+
+  }
+
+  divide(c) {
+
+  }
+
+  toString(c) {
+    return `${this.real}+${this.imag}j`
+  }
+  }
+</script>
 
 
 
@@ -2421,10 +2480,47 @@ class Stack {
 
   </script>
 </script>
-<script type="" id="ch0105/01"></script>
-<script type="" id="ch0105/01"></script>
-<script type="" id="ch0105/01"></script>
-<script type="" id="ch0105/01"></script>
+<script type="" id="ch0105/01">
+  function flatten1(array) {
+    var result = []
+    array.reduce(function(result, it) {
+      result = result.concat(it)
+    })
+    return result
+  }
+</script>
+<script type="" id="ch0105/01">
+  a[symbol.iterator] = function() {
+    var i = 0
+     return {
+      next: function (params) {
+
+      }() {
+        return {
+          value:
+          done:
+        }
+      }
+     }
+     }
+  }
+</script>
+<script type="" id="ch0105/01">
+  class Group {
+
+  }
+  constructor() {
+
+  }
+</script>
+<script type="" id="ch0105/01">
+  function A () {
+
+  }
+  A.prototype.a = function() {
+
+  }
+</script>
 <script type="" id="ch0105/01"></script>
 <script type="" id="ch0105/01"></script>
 <script type="" id="ch0105/01"></script>
