@@ -307,9 +307,106 @@ var dh2221778997 = {
     }
   },
 
-  every:  function() {
+  every:  function(collection, predicate) {
+    if (Array.isArray(collection)) {
+      for (var i = 0; i < collection.length; i++) {
+        if (!predicate(collection[i])) {
+          return false
+        }
+      }
+      return true
+    }
+    if (collection instanceof Object) {
+      if (typeof predicate == 'string') {
+        for (var key in collection) {
+          if (!collection[key][predicate]) {
+            return false
+          }
+        }
+        return true
+      }
+      if (Array.isArray(predicate)) {
+        for (var key in collection) {
+          if (collection[key][predicate[0]] != predicate[1]) {
+            return false
+          }
+        }
+        return true
+      }
+      if (predicate instanceof Object) {
+        for (var key in collection) { //未写完
+
+        }
+      }
+    }
+  },
+
+  some: function() {
+    //和every差不多
+  },
+
+  countBy: function(collection, f) {
+    if (Array.isArray(collection)) {
+      var result = {}
+      for (var i = 0; i < collection.length; i++) {
+        if (f(collection[i]) in result) {
+          result[f(collection[i])]++
+        } else {
+          result[f(collection[i])] = 1
+        }
+      }
+      return result
+    }
+    if (collection instanceof Object) {
+      var result = {}
+      for (var key in collection) {
+        if (f(collection[i]) in result) {
+          result[f(collection[i])]++
+        } else {
+          result[f(collection[i])] = 1
+        }
+      }
+      return result
+
+    }//写错了 如果是属性的话不知道怎么写
+  },
+
+  groupBy: function(collection, f) {
+    if (Array.isArray(collection)) {
+      var result = {}
+      for (var i = 0; i < collection.length; i++) {
+        if (f(collection[i]) in result) {
+          result[f(collection[i])].push(collection[i])
+        } else {
+          result[f(collection[i])] = []
+          result[f(collection[i])].push(collection[i])
+        }
+      }
+      return result
+    }
+    if (collection instanceof Object) {
+      var result = {}
+      for (var key in collection) {
+        if (f(collection[i]) in result) {
+          result[f(collection[i])].push(collection[i])
+        } else {
+          result[f(collection[i])] = []
+          result[f(collection[i])].push(collection[i])
+        }
+      }
+      return result//如果是对象不知道怎么去迭代，以及迭代的结果是什么不知道
+    }
+  },
+
+  keyBy: function() {
+
+  },
+
+  forEach: function() {
 
   }
+
+
 
 
 
