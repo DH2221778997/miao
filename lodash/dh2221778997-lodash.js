@@ -24,7 +24,7 @@ var dh2221778997 = {
     var newary = []
     for (var i = 0 ; i < array.length ; i++) {
       var t = array[i]
-      if (!(t == false || t == null || t == 0 || t == undefined || t == NaN || t == '')) {
+      if (!(t == false || t == null || t == 0 || t == undefined || t != t || t == '')) {
         newary.push(t)
       }
     }
@@ -51,7 +51,22 @@ var dh2221778997 = {
 
   difference: function(array,...values) {
     var newary = []
-    var value
+    var newobj = {}
+    for (var i = 0; i < values.length; i++ ) {
+      if (Array.isArray(values[i])) {
+        for (var j = 0; j < values[i].length; j++) {
+          newobj[values[i][j]] = 1
+        }
+      } else {
+          newobj[values[i]] = 1
+      }
+    }
+    for (var k = 0; k < array.length; k++) {
+      if (!(array[k] in newobj)) {
+        newary.push(array[k])
+      }
+    }
+    return newary
   },
 
   drop: function(array, n = 1) {
@@ -110,13 +125,22 @@ var dh2221778997 = {
           return i
         }
       }
-      if (typeof predicate == 'object') {
-        if (array[i] == predicate) {
-          return i
+
+      if (predicate instanceof Object) {
+        if (Array.isArray(predicate)) {
+          if (array[i][predicate[0]] == predicate[1]) {
+            return i
+          }
+        } else {
+          for (var key in array[i]) {
+            if (array[i][key] != predicate[key]) {
+              break//此处有问题
+            }
+          }
         }
       }
       if (typeof predicate == 'string') {
-        if (array.predicate) {
+        if (array[predicate]) {
           return i
         }
       }
@@ -208,16 +232,9 @@ var dh2221778997 = {
     }
   },
 
-  indexof: function(array, value, fromIndex = 0) {
+  indexOf: function(array, value, fromIndex = 0) {
     if (fromIndex >= array.length) {
       return -1
-    }
-    if (fromIndex < 0) {
-      for (var i = array.length + fromIndex ; i < array.length; i++) {
-        if (array[i] == value) {
-          return i
-        }
-      }
     }
     for (var i = fromIndex; i < array.length; i++) {
       if (array[i] == value) {
@@ -232,6 +249,7 @@ var dh2221778997 = {
     for (var i = 0; i < array.length - 1; i++) {
       newary.push(array[i])
     }
+    return newary
   },
 
   intersection: function(...arrays) {
@@ -261,12 +279,18 @@ var dh2221778997 = {
     var strings = ''
     for (var i = 0; i < array.length; i++) {
       if (i == array.length -1) {
-        strings += array[i]
+        strings += ''+array[i]
       } else {
-        strings += array[i]+separator
+        strings += ''+array[i]+separator
       }
     }
     return strings
+  },
+
+  pull: function(array, ...values) {
+    for (var i = 0; i < array.length; i++) {
+      //未写完
+    }
   },
 
   last: function(array) {
@@ -280,6 +304,7 @@ var dh2221778997 = {
         return i
       }
     }
+    return -1
   },
 
 
