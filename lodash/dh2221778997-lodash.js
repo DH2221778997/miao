@@ -288,9 +288,23 @@ var dh2221778997 = {
   },
 
   pull: function(array, ...values) {
+    var newary = []
     for (var i = 0; i < array.length; i++) {
-      //未写完
+      var t = true
+      for (var j = 0; j < values.length; j++) {
+        if (array[i] == values[j]) {
+          t = false
+        }
+      }
+      if (t) {
+        newary.push(array[i])
+      }
     }
+    var array = []
+    for (var i = 0; i < newary.length; i++) {
+      array.push(newary[i])
+    }
+    return array
   },
 
   last: function(array) {
@@ -369,6 +383,7 @@ var dh2221778997 = {
   some: function() {
     //和every差不多
   },
+
 
   countBy: function(collection, f) {
     if (Array.isArray(collection)) {
