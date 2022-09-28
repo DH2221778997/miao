@@ -1,5 +1,34 @@
 var dh2221778997 = {
 
+  checkPredicate: function(something, predicate) {
+    if (typeof predicate == 'string') {
+      if (something[predicate]) {
+        return true
+      } else {
+        return false
+      }
+    }
+    if (typeof predicate == 'function') {
+      return predicate(something)
+    }
+    if (predicate instanceof Object) {
+      if (Array.isArray(predicate)) {
+        if (something[predicate[0]] == predicate[1]) {
+          return true
+        } else {
+          return false
+        }
+      } else {
+        for (var key in predicate) {
+          if (predicate[key] != something[key]) {
+            return false
+          }
+        }
+        return true
+      }
+    }
+  },
+
   chunk: function(array, size = 1) {
     var newary = []
     var newsonary =[]
@@ -148,6 +177,40 @@ var dh2221778997 = {
     return -1
   },
 
+  flattenDeep: function(array) {
+      var newary = []
+    for (var i = 0; i < array.length; i++) {
+      if (Array.isArray(array[i])) {
+        var flattedarray = flattenDeep(array[i])
+        for (var j = 0; j < flattedarray.length; j++) {
+          newary.push(flattedarray[j])
+        }
+      } else {
+        newary.push(array[i])
+      }
+    }
+    return newary
+  },
+
+  flattenDepth: function(array, depth = 1) {
+    var newary = []
+    if (depth == 0) {
+      return array.slice()
+    } else {
+      for (var i = 0; i < array.length; i++) {
+        if (Array.isArray(array[i])) {
+          var flattedarray = flattenDepth(array[i], depth - 1)
+          for (var j = 0; j < flattedarray.length; j++) {
+            newary.push(flattedarray[j])
+          }
+        } else {
+          newary.push(array[i])
+        }
+      }
+    }
+    return newary
+  },
+
   findLastIndex: function(array, predicate, fromIndex = array.length -1) {
     for (var i = fromIndex; i >= 0 ; i--) {
       if (typeof predicate == 'function') {
@@ -183,37 +246,12 @@ var dh2221778997 = {
     return newary
   },
 
-  flattenDeep: function abb(array) {
-      var newary = []
-      for (var i = 0 ; i < array.length; i++) {
-        if (Array.isArray(array[i])) {
-          var flattedary = flattenDeep(array[i])
-          for (var j = 0; j < flattedary.length ; j++) {
-            newary.push(flattedary[j])
-          }
-        } else {
-          newary.push(array[i])
-        }
-      }
-      return newary
-  },
-
-  flattenDepth: function(array, depth = 1) {
-    var newary = []
-    if (depth == 0) {
-      return array.slice()
+  reverse: function(array) {
+    var n = array.length
+    for (var i = array.length - 1 ; i >=0; i--) {
+      array.push(array[i])
     }
-    for (var i = 0; i< array.length ; i++) {
-      if (Array.isArray(array[i])) {
-        var flattedary = flattenDepth(array[i], depth-1)
-        for (var j = 0; j < flattedary.length; j++) {
-          newary.push(flattedary[j])
-        }
-      } else {
-        newary.push(array[i])
-      }
-    }
-    return newary
+    return array.splice(0, n)
   },
 
   fromPairs: function(pairs) {
@@ -385,66 +423,132 @@ var dh2221778997 = {
   },
 
 
-  countBy: function(collection, f) {
-    if (Array.isArray(collection)) {
-      var result = {}
+  countBy: function(collection, action) {
+    var newObj = {}
+    if (typeof action == 'function') {
       for (var i = 0; i < collection.length; i++) {
-        if (f(collection[i]) in result) {
-          result[f(collection[i])]++
+        if (action(collection[i]) in newObj) {
+          newObj[action(collection[i])]++
         } else {
-          result[f(collection[i])] = 1
+          newObj[action(collection[i])] = 1
         }
       }
-      return result
+      return newObj
     }
-    if (collection instanceof Object) {
-      var result = {}
-      for (var key in collection) {
-        if (f(collection[i]) in result) {
-          result[f(collection[i])]++
-        } else {
-          result[f(collection[i])] = 1
-        }
-      }
-      return result
-
-    }//写错了 如果是属性的话不知道怎么写
-  },
-
-  groupBy: function(collection, f) {
-    if (Array.isArray(collection)) {
-      var result = {}
+    if (typeof action == 'string') {
       for (var i = 0; i < collection.length; i++) {
-        if (f(collection[i]) in result) {
-          result[f(collection[i])].push(collection[i])
+        if (collection[i][action] in newObj) {
+          newObj[collection[i][action]]++
         } else {
-          result[f(collection[i])] = []
-          result[f(collection[i])].push(collection[i])
+          newObj[collection[i][action]] = 1
         }
       }
-      return result
+      return newObj
     }
+  },
+
+  groupBy: function(collection, action) {
+    var newObj = {}
+    if (typeof action == 'function') {
+      for (var i = 0; i < collection.length; i++) {
+        if (action(collection[i]) in newObj) {
+          newObj[action(collection[i])].push(collection[i])
+        } else {
+          newObj[action(collection[i])] = []
+          newObj[action(collection[i])].push(collection[i])
+        }
+      }
+      return newObj
+    }
+    if (typeof action == 'string') {
+      for (var i = 0; i < collection.length; i++) {
+        if (collection[i][action] in newObj) {
+          newObj[collection[i][action]].push(collection[i])
+        } else {
+          newObj[collection[i][action]] = []
+          newObj[collection[i][action]].push(collection[i])
+        }
+      }
+      return newObj
+    }
+  },
+
+  keyBy: function(collection, action) {
+    var newObj = {}
+    if (typeof action == 'function') {
+      for (var i = 0; i < collection.length; i++) {
+        newObj[action(collection[i])] = collection[i]
+      }
+      return newObj
+    }
+    if (typeof action == 'string') {
+      for (var i = 0; i < collection.length; i++) {
+        newObj[collection[i][action]] = collection[i]
+      }
+      return newObj
+    }
+  },
+
+  forEach: function(collection, action) {
     if (collection instanceof Object) {
-      var result = {}
-      for (var key in collection) {
-        if (f(collection[i]) in result) {
-          result[f(collection[i])].push(collection[i])
-        } else {
-          result[f(collection[i])] = []
-          result[f(collection[i])].push(collection[i])
+      if (Array.isArray(collection)) {
+        for (var i = 0; i < collection.length; i++) {
+          action(collection[i], i , collection)
+        }
+      } else {
+        for (var key in collection) {
+          action(collection[i], key, collection)
         }
       }
-      return result//如果是对象不知道怎么去迭代，以及迭代的结果是什么不知道
+    }
+    return collection
+  },
+
+  map: function(collection, action) {
+    var newary = []
+    if (typeof action == 'function') {
+      if (Array.isArray(collection)) {
+        for (var i = 0; i < collection.length; i++) {
+          newary.push(action(collection[i]))
+        }
+        return newary
+      } else {
+        for (var key in collection) {
+          newary.push(action(collection[key]))
+        }
+        return newary
+      }
+    }
+    if (typeof action == 'string') {
+      if (Array.isArray(collection)) {
+        for (var i = 0; i < collection.length; i++) {
+          newary.push(collection[i][action])
+        }
+        return newary
+      } else {
+        newary.push(collection[action])
+        return newary
+      }
     }
   },
 
-  keyBy: function() {
+  filter: function(collection, predicate) {
 
   },
 
-  forEach: function() {
-
-  }
+  reduce: function(collection, action, accumulator) {
+    if (Array.isArray(collection)) {
+      for (var i =0 ; i < collection.length; i++) {
+        accumulator = action(accumulator, collection[i])
+      }
+      return accumulator
+    } else {
+      for (var key in collection) {
+        accumulator = action(accumulator, collection[key], key)
+      }
+      return accumulator
+    }
+  },
 
 
 
