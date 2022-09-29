@@ -509,7 +509,7 @@ var dh2221778997 = {
     if (typeof action == 'function') {
       if (Array.isArray(collection)) {
         for (var i = 0; i < collection.length; i++) {
-          newary.push(action(collection[i]))
+          newary.push(action(collection[i], i, collection))
         }
         return newary
       } else {
@@ -538,8 +538,15 @@ var dh2221778997 = {
 
   reduce: function(collection, action, accumulator) {
     if (Array.isArray(collection)) {
-      for (var i =0 ; i < collection.length; i++) {
-        accumulator = action(accumulator, collection[i])
+      if (accumulator == undefined) {
+        accumulator = collection[0]
+        for (var i =1 ; i < collection.length; i++) {
+          accumulator = action(accumulator, collection[i])
+        }
+      } else {
+        for (var i =0 ; i < collection.length; i++) {
+          accumulator = action(accumulator, collection[i])
+        }
       }
       return accumulator
     } else {
@@ -547,6 +554,215 @@ var dh2221778997 = {
         accumulator = action(accumulator, collection[key], key)
       }
       return accumulator
+    }
+  },
+
+  reduceRight: function(collection, action, accumulator) {
+    if (Array.isArray(collection)) {
+      if (accumulator == undefined) {
+        accumulator = collection[collection.length -1]
+        for (var i =collection.length -1 ; i >= 1; i--) {
+          accumulator = action(accumulator, collection[i])
+        }
+      } else {
+        for (var i =collection.length - 1 ; i >= 0; i--) {
+          accumulator = action(accumulator, collection[i])
+        }
+      }
+      return accumulator
+    } else {
+      for (var key in collection) {
+        accumulator = action(accumulator, collection[key], key)
+      }
+      return accumulator
+    }
+  },
+
+  size: function(collection) {
+    if (typeof collection == 'string') {
+      return collection.length
+    } else if (Array.isArray(collection)) {
+      return collection.length
+    } else {
+      var t = 0
+      for (var key in collection) {
+        t++
+      }
+      return t
+    }
+  },
+
+  sortBy: function(collection, action) {
+    var newary = []
+    if (Array.isArray(collection)) {
+
+    } else {
+
+    }
+  },
+
+  sample: function(collection) {
+    if (Array.isArray(collection)) {
+      var a = Math.floor(Math.random() * collection.length)
+      return collection[a]
+    } else {
+      for (var key in collection) {
+        return key
+      }
+    }
+  },
+
+  isUndefined: function(value) {
+    if (value === undefined) {
+      return true
+    } else {
+      return false
+    }
+  },
+
+  isNull: function(value) {
+    if (value === null) {
+      return true
+    } else {
+      return false
+    }
+  },
+
+  isNil: function(value) {
+    if (value === undefined || value === null) {
+      return true
+    } else {
+      return false
+    }
+  },
+
+  max: function(array) {
+    if (!array) {
+      return undefined
+    } else if (array == []) {
+      return undefined
+    } else {
+      var t = -Infinity
+      for (var i = 0; i < array.length; i++) {
+        if (array[i] > t) {
+          t = array[i]
+        }
+      }
+      return t
+    }
+  },
+
+  min: function() {
+    if (!array) {
+      return undefined
+    } else if (array == []) {
+      return undefined
+    } else {
+      var t = Infinity
+      for (var i = 0; i < array.length; i++) {
+        if (array[i] < t) {
+          t = array[i]
+        }
+      }
+      return t
+    }
+  },
+
+  maxBy: function(array, action) {
+    if (typeof action == 'string') {
+      var t = array[0][action]
+      for (var i = 0; i < array.length; i++) {
+        if (array[i][action] > t ) {
+          t = array[i][action]
+        }
+      }
+      return t
+    }
+    if (typeof action == 'function') {
+      var t = action(array[0])
+      for (var i = 0; i < array.length; i++) {
+        if (action(array[i]) > t ) {
+          t = action(array[i])
+        }
+      }
+      return t
+    }
+  },
+
+  minBy: function(array, action) {
+    if (typeof action == 'string') {
+      var t = array[0][action]
+      for (var i = 0; i < array.length; i++) {
+        if (array[i][action] < t ) {
+          t = array[i][action]
+        }
+      }
+      return t
+    }
+    if (typeof action == 'function') {
+      var t = action(array[0])
+      for (var i = 0; i < array.length; i++) {
+        if (action(array[i]) < t ) {
+          t = action(array[i])
+        }
+      }
+      return t
+    }
+  },
+
+  round: function(number, precision = 0) {
+    return (Math.round(number * (10 ** precision))) / (10 ** precision)
+  },
+
+  sumBy: function(array, action) {
+    var sum = 0
+    if (typeof action == 'string') {
+      for (var i = 0; i < array.length; i++) {
+        sum += array[i][action]
+      }
+      return sum
+    }
+    if (typeof action == 'function') {
+      for (var i = 0; i < array.length; i++) {
+        sum += action(array[i])
+      }
+      return sum
+    }
+  },
+
+  flatMap: function(collection, action) {
+    var newary = []
+    var ary = []
+    if (Array.isArray(collection)) {
+      for (var i = 0; i < collection.length; i++) {
+        ary.push(action(collection[i], i , collection))
+      }
+      newary = dh2221778997[flatten](ary)
+      return newary
+    } else {
+      for (var key in collection) {
+        ary.push(action(collection[key], key , collection))
+      }
+      newary = dh2221778997[flatten](ary)
+      return newary
+    }
+  },
+
+  flatMapDepth: function(collection, action, depth = 1) {
+    var newary = []
+    var ary = []
+    if (Array.isArray(collection)) {
+      for (var i = 0; i < collection.length; i++) {
+        ary.push(action(collection[i], i , collection))
+      }
+      newary = dh2221778997[this.flattenDepth](ary, depth)
+      return newary
+    } else {
+      for (var key in collection) {
+        ary.push(action(collection[key], key , collection))
+      }
+      newary = dh2221778997[this.flattenDepth](ary, depth)
+      return newary
     }
   },
 
