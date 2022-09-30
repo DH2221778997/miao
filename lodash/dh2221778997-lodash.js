@@ -639,7 +639,7 @@ var dh2221778997 = {
   max: function(array) {
     if (!array) {
       return undefined
-    } else if (array == []) {
+    } else if (array.length == 0) {
       return undefined
     } else {
       var t = -Infinity
@@ -655,7 +655,7 @@ var dh2221778997 = {
   min: function() {
     if (!array) {
       return undefined
-    } else if (array == []) {
+    } else if (array.length == 0) {
       return undefined
     } else {
       var t = Infinity
@@ -674,18 +674,20 @@ var dh2221778997 = {
       for (var i = 0; i < array.length; i++) {
         if (array[i][action] > t ) {
           t = array[i][action]
+          var z = array[i]
         }
       }
-      return t
+      return z
     }
     if (typeof action == 'function') {
       var t = action(array[0])
       for (var i = 0; i < array.length; i++) {
         if (action(array[i]) > t ) {
           t = action(array[i])
+          var z = array[i]
         }
       }
-      return t
+      return z
     }
   },
 
@@ -695,18 +697,20 @@ var dh2221778997 = {
       for (var i = 0; i < array.length; i++) {
         if (array[i][action] < t ) {
           t = array[i][action]
+          var z = array[i]
         }
       }
-      return t
+      return z
     }
     if (typeof action == 'function') {
       var t = action(array[0])
       for (var i = 0; i < array.length; i++) {
         if (action(array[i]) < t ) {
           t = action(array[i])
+          var z = array[i]
         }
       }
-      return t
+      return z
     }
   },
 
