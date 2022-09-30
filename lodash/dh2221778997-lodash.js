@@ -652,7 +652,7 @@ var dh2221778997 = {
     }
   },
 
-  min: function() {
+  min: function(array) {
     if (!array) {
       return undefined
     } else if (array.length == 0) {
@@ -670,7 +670,7 @@ var dh2221778997 = {
 
   maxBy: function(array, action) {
     if (typeof action == 'string') {
-      var t = array[0][action]
+      var t = -Infinity
       for (var i = 0; i < array.length; i++) {
         if (array[i][action] > t ) {
           t = array[i][action]
@@ -680,7 +680,7 @@ var dh2221778997 = {
       return z
     }
     if (typeof action == 'function') {
-      var t = action(array[0])
+      var t = -Infinity
       for (var i = 0; i < array.length; i++) {
         if (action(array[i]) > t ) {
           t = action(array[i])
@@ -693,7 +693,7 @@ var dh2221778997 = {
 
   minBy: function(array, action) {
     if (typeof action == 'string') {
-      var t = array[0][action]
+      var t = Infinity
       for (var i = 0; i < array.length; i++) {
         if (array[i][action] < t ) {
           t = array[i][action]
@@ -703,7 +703,7 @@ var dh2221778997 = {
       return z
     }
     if (typeof action == 'function') {
-      var t = action(array[0])
+      var t = Infinity
       for (var i = 0; i < array.length; i++) {
         if (action(array[i]) < t ) {
           t = action(array[i])
