@@ -1,11 +1,9 @@
 var dh2221778997 = {
 
-  checkPredicate: function(something, predicate) {
+  checkPredicate: function(predicate) {
     if (typeof predicate == 'string') {
-      if (something[predicate]) {
-        return true
-      } else {
-        return false
+      return function(person) {
+        return
       }
     }
     if (typeof predicate == 'function') {
@@ -147,31 +145,10 @@ var dh2221778997 = {
     return array
   },
 
-  findIndex: function(array, predicate, fromIndex = 0) {
-    for (var i = fromIndex; i < array.length ; i++) {
-      if (typeof predicate == 'function') {
-        if (predicate(array[i])) {
-          return i
-        }
-      }
-
-      if (predicate instanceof Object) {
-        if (Array.isArray(predicate)) {
-          if (array[i][predicate[0]] == predicate[1]) {
-            return i
-          }
-        } else {
-          for (var key in array[i]) {
-            if (array[i][key] != predicate[key]) {
-              break//此处有问题
-            }
-          }
-        }
-      }
-      if (typeof predicate == 'string') {
-        if (array[predicate]) {
-          return i
-        }
+  findIndex: function(array, checkPredicate, fromIndex = 0) {
+    for (var i = fromIndex; i < array.length; i++) {
+      if (checkPredicate(array[i])) {
+        return i
       }
     }
     return -1
@@ -769,6 +746,237 @@ var dh2221778997 = {
       return newary
     }
   },
+
+  get: function(object, path, defaultValue) {
+    var result = object
+    if (typeof path == 'string') {
+      var newpath = ''
+      for (var i = 0; i < path.length; i++) {
+        if (path[i] != '[' && path[i] != ']' && path[i] != '.') {
+          newpath += path[i]
+        }
+      }
+      for (var i = 0; i < newpath.length; i++) {
+        result = result[newpath[i]]
+        if (result === undefined) {
+          return defaultValue
+        }
+      }
+      return result
+    }
+    if (Array.isArray(path)) {
+      for (var i = 0; i < path.length; i++) {
+        result = result[path[i]]
+        if (result === undefined) {
+          return defaultValue
+        }
+      }
+      return result
+    }
+  },
+
+  has: function(object, path) {
+    var result = object
+    if (typeof path == 'string') {
+      var newpath = ''
+      for (var i = 0; i < path.length; i++) {
+        if (path[i] != '[' && path[i] != ']' && path[i] != '.') {
+          newpath += path[i]
+        }
+      }
+      for (var i = 0; i < newpath.length; i++) {
+        result = result[newpath[i]]
+        if (result === undefined) {
+          return false
+        }
+      }
+      return true
+    }
+    if (Array.isArray(path)) {
+      for (var i = 0; i < path.length; i++) {
+        result = result[path[i]]
+        if (result === undefined) {
+          return false
+        }
+      }
+      return true
+    }
+  },
+
+  mapKeys: function(object, action) {
+    var newobj = {}
+    for (var key in object) {
+      newobj[action(object[key], key, object)] = object[key]
+    }
+    return newobj
+  },
+
+  mapValues: function(object, action) {
+    var newobj = {}
+    if (typeof action == 'string') {
+      for (var key in object) {
+        newobj[key] = object[key][action]
+      }
+      return newobj
+    }
+    if (typeof action == 'function') {
+      for (var key in object) {
+        newobj[key] = action(object[key], key, object)
+      }
+      return newobj
+    }
+  },
+
+  range: function(start = 0, end, step = 1) {
+
+  },
+
+  stringifyJSON: function() {//loadsh上未找到
+
+  },
+
+  concat: function() {
+
+  },
+
+  isEqual: function() {
+    for (var key in object) {
+      if (object[key] != other[key]) {
+        return false
+      }
+    }
+    return true//这是错的
+  },
+
+  repeat: function(string, n = 1) {
+    var t = string
+    var newstring = ''
+    for (var i = 1; i <= n ; i++) {
+      newstring += t
+    }
+    return newstring
+  },
+
+  padStart: function(string = '', length = 0, chars = ' ') {
+    var padstring = string
+    if (string.length < length) {
+      var padlength = length - string.length
+      if (chars.length == 1) {
+        for (var i = 1; i <= padlength; i++) {
+          padstring = chars + padstring
+        }
+      } else {
+        for (var i = padlength % chars.length -1; i >= 0 ; i--) {
+          padstring = chars[i] + padstring
+        }
+        for (var i = 1; i <= Math.floor(padlength /chars.length); i++) {
+          padstring = chars + padstring
+        }
+      }
+      return padstring
+    } else {
+      return string
+    }
+  },
+
+  padEnd: function(string = '', length = 0, chars = ' ') {
+    var padstring = string
+    if (string.length < length) {
+      var padlength = length - string.length
+      if (chars.length == 1) {
+        for (var i = 1; i <= padlength; i++) {
+          padstring = padstring + chars
+        }
+      } else {
+        for (var i = 1; i <= Math.floor(padlength /chars.length); i++) {
+          padstring = padstring + chars
+        }
+        for (var i = 0; i < padlength % chars.length ; i--) {
+          padstring =  padstring + chars[i]
+        }
+      }
+      return padstring
+    } else {
+      return string
+    }
+  },
+
+  pad: function(string = '', length = 0, chars = ' ') {
+    var padstring = string
+    if (string.length < length) {
+      var padlength = length - string.length
+        for (var i = 1; i <= Math.floor(padlength /chars.length); i++) {
+          padstring = padstring + chars
+        }
+        for (var i = 0; i < padlength % chars.length ; i--) {
+          padstring =  padstring + chars[i]
+        }
+        return padstring
+    } else {
+      return string//没写完
+    }
+  },
+
+  keys: function(object) {
+    var newary = []
+    if (typeof object == 'string') {
+      for (var i = 0; i < object.length; i++) {
+        newary.push(i)
+      }
+    } else {
+      for (var key in object) {
+        newary.push(key)
+      }
+    }
+    return newary
+  },
+
+  random: function(lower = 0, upper = 1, floating) {
+    if (floating == undefined) {
+      if (arguments.length == 1) {
+        upper = arguments[0]
+        lower = 0
+        return Math.floor(Math.random() * (upper + 1))
+      }
+      if (arguments.length == 2 && arguments[0].toString().indexOf('.') == -1 && arguments[1].toString().indexOf('.') == -1) {
+        return Math.floor(Math.random() *(upper + 1 - lower)) + lower
+      }
+      if (arguments.length == 2 && arguments[0].toString().indexOf('.') != -1 && arguments[1].toString().indexOf('.') != -1) {
+        return Math.random() * (upper - lower) + lower
+      }
+    } else {
+      if (arguments.length == 2) {
+        upper = arguments[0]
+        lower = 0
+        return Math.random() * upper
+      } else {
+        return Math.random() * (upper - lower) + lower
+      }
+    }//有问题
+  },
+
+
+  ceil: function(number, precision = 0) {
+
+  },
+
+  cloneDeep: function() {
+
+  },
+
+  trim: function(string = '', chars = whitespace) {
+
+  },
+
+  trimStart: function() {
+
+  },
+
+  trimEnd: function() {
+
+  }
+
+
 
 
 
